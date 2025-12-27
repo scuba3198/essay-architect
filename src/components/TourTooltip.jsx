@@ -35,12 +35,12 @@ const TourTooltip = ({ stepIndex, currentStep, onNext, onSkip, text, position = 
                 <div className="flex justify-between items-center pt-3 border-t border-stone-900/20 mt-1">
                     <button onClick={onSkip} className="text-stone-700 hover:text-stone-900 text-xs font-bold uppercase tracking-wider underline decoration-1 underline-offset-2">End Tour</button>
                     <div className="flex items-center gap-3">
-                        <span className="text-[10px] text-stone-600 font-mono">{stepIndex + 1}/6</span>
+                        <span className="text-[10px] text-stone-600 font-mono">{stepIndex + 1}/4</span>
                         <button
                             onClick={onNext}
                             className="bg-stone-900 text-white px-4 py-1.5 text-xs font-bold uppercase tracking-wider hover:bg-white hover:text-stone-900 transition-colors border border-stone-900"
                         >
-                            {stepIndex === 5 ? "Finish" : "Next"}
+                            {stepIndex === 3 ? "Finish" : "Next"}
                         </button>
                     </div>
                 </div>
