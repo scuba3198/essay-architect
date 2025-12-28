@@ -1,9 +1,7 @@
 
-import React, { useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Wand2, Zap, Sparkles } from 'lucide-react';
-import { callGemini } from '../lib/api';
+import React, { useRef } from 'react';
+import { ChevronLeft, ChevronRight, Zap } from 'lucide-react';
 import TourTooltip from './TourTooltip';
-import RefineModal from './modals/RefineModal';
 
 const VocabularyPill = ({ words, onSelect }) => {
     return (
@@ -18,7 +16,6 @@ const VocabularyPill = ({ words, onSelect }) => {
                     className="group relative inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide bg-white border border-stone-900 text-stone-900 px-4 py-2 hover:bg-stone-900 hover:text-white transition-all duration-200 shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
                     title="Click to insert into text box"
                 >
-                    <Sparkles size={10} className="opacity-0 group-hover:opacity-100 transition-opacity absolute left-1" />
                     <span className="group-hover:pl-2 transition-all">{word}</span>
                 </button>
             ))}
@@ -26,7 +23,7 @@ const VocabularyPill = ({ words, onSelect }) => {
     );
 };
 
-const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tourProps, topic }) => {
+const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tourProps }) => {
     const steps = [
         { id: 'intro', title: 'The Introduction', subtitle: 'Set the Stage', icon: "I" },
         { id: 'body1', title: 'The First Argument', subtitle: 'Point, Explain, Evidence', icon: "II" },
@@ -35,8 +32,6 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
     ];
 
     const currentStepData = steps[currentStep];
-    const [refineModal, setRefineModal] = useState({ isOpen: false, text: '', section: '', field: '' });
-    const [generatingField, setGeneratingField] = useState(null);
     const textareaRefs = useRef({});
 
     const handleVocabularyInsert = (section, field, text) => {
@@ -64,126 +59,20 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
         }
     };
 
-    const openRefine = (section, field, text) => {
-        if (!text || text.trim().length < 5) return;
-        setRefineModal({ isOpen: true, text, section, field });
-    };
-
-    const handleRefineAccept = (newText) => {
-        handleInputChange(refineModal.section, refineModal.field, newText);
-    };
-
-    const handleAutocomplete = async (section, field, currentText) => {
-        setGeneratingField(`${section}-${field}`);
-        try {
-            // Build sophisticated context based on the entire essay flow so far
-            let contextInfo = "";
-
-            // Helper to get text safely
-            const getTxt = (sec, fld) => essay[sec]?.[fld] || "";
-
-            if (section === 'intro') {
-                if (field === 'thesis') {
-                    contextInfo = `Preceding Paraphrase: "${getTxt('intro', 'paraphrase')}"`;
-                }
-            }
-            else if (section === 'body1') {
-                // For Body 1, knowing the thesis is crucial
-                const thesis = getTxt('intro', 'thesis');
-
-                if (field === 'topicSentence') {
-                    contextInfo = `Essay Thesis: "${thesis}"`;
-                } else if (field === 'explanation') {
-                    contextInfo = `Topic Sentence: "${getTxt('body1', 'topicSentence')}"`;
-                } else if (field === 'example') {
-                    contextInfo = `Argument Context: "${getTxt('body1', 'topicSentence')} ${getTxt('body1', 'explanation')}"`;
-                } else if (field === 'concluding') {
-                    contextInfo = `Argument Context: "${getTxt('body1', 'topicSentence')} ${getTxt('body1', 'explanation')} ${getTxt('body1', 'example')}"`;
-                }
-            }
-            else if (section === 'body2') {
-                // For Body 2, we need Thesis AND Body 1 to determine if it's a "Furthermore" or "However" paragraph
-                const thesis = getTxt('intro', 'thesis');
-                const body1Topic = getTxt('body1', 'topicSentence');
-
-                if (field === 'topicSentence') {
-                    contextInfo = `Essay Thesis: "${thesis}".\nPrevious Paragraph Main Point: "${body1Topic}". (Ensure smooth transition/flow from previous paragraph - e.g. using 'However' if contrasting, or 'Furthermore' if supporting).`;
-                } else if (field === 'explanation') {
-                    contextInfo = `Topic Sentence: "${getTxt('body2', 'topicSentence')}"`;
-                } else if (field === 'example') {
-                    contextInfo = `Argument Context: "${getTxt('body2', 'topicSentence')} ${getTxt('body2', 'explanation')}"`;
-                } else if (field === 'concluding') {
-                    contextInfo = `Argument Context: "${getTxt('body2', 'topicSentence')} ${getTxt('body2', 'explanation')} ${getTxt('body2', 'example')}"`;
-                }
-            }
-            else if (section === 'conclusion') {
-                if (field === 'summary') {
-                    // Needs to recap main points
-                    contextInfo = `Thesis: "${getTxt('intro', 'thesis')}".\nBody 1 Point: "${getTxt('body1', 'topicSentence')}".\nBody 2 Point: "${getTxt('body2', 'topicSentence')}".`;
-                } else if (field === 'finalThought') {
-                    contextInfo = `Preceding Summary: "${getTxt('conclusion', 'summary')}"`;
-                }
-            }
-
-            const prompt = `Act as an academic essay writer.
-            Essay Topic: "${topic?.question}". 
-            Current Section: ${section.toUpperCase()} - ${field}.
-            
-            ${contextInfo ? `CONTEXT (Must flow logically from this): ${contextInfo}` : ''}
-            
-            Existing text in current box: "${currentText}".
-            
-            Task: Write exactly ONE sentence (or complete the current unfinished sentence) for this specific box. 
-            CRITICAL constraints:
-            1. Ensure logical consistency. If the 'CONTEXT' argues a specific point, your completion MUST support that same point unless the 'Existing text' explicitly starts a transition.
-            2. MAX 1 SENTENCE. Do not write a paragraph.
-            3. LANGUAGE: Use 10th-grade reading level vocabulary (clear, academic, accessible).
-            Return ONLY the text to be added.`;
-
-            const completion = await callGemini(prompt);
-            if (completion) {
-                const spacer = currentText.length > 0 && !currentText.match(/\s$/) ? ' ' : '';
-                const newVal = currentText + spacer + completion.trim();
-                handleInputChange(section, field, newVal);
-            }
-        } catch (err) {
-            alert("Autocomplete failed. Check your API key.");
-        } finally {
-            setGeneratingField(null);
-        }
-    };
-
-    const RefineButton = ({ section, field, text }) => (
-        <div className="flex gap-2">
-            <button
-                onClick={() => handleAutocomplete(section, field, text)}
-                disabled={generatingField === `${section}-${field}`}
-                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-blue-600 hover:text-blue-700 disabled:opacity-50 transition-opacity"
-                title="Autocomplete sentence"
-            >
-                {generatingField === `${section}-${field}` ? <Wand2 size={10} className="animate-spin" /> : <Zap size={10} />} Complete
-            </button>
-            <button
-                onClick={() => openRefine(section, field, text)}
-                disabled={!text || text.length < 5}
-                className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-yellow-600 hover:text-yellow-700 disabled:opacity-0 transition-opacity"
-            >
-                <Sparkles size={10} /> Refine
-            </button>
-        </div>
+    const ProBadge = () => (
+        <a
+            href="https://pro.essay-architect.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-stone-400 hover:text-stone-900 transition-colors bg-stone-100 px-2 py-1 border border-stone-200"
+            title="Unlock AI Autocomplete & Refinement in Pro Version"
+        >
+            <Zap size={10} className="text-yellow-500" /> AI Powered Pro
+        </a>
     );
 
     return (
         <div className="bg-white border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(231,229,228,1)] flex flex-col h-full relative">
-            {refineModal.isOpen && (
-                <RefineModal
-                    isOpen={refineModal.isOpen}
-                    onClose={() => setRefineModal({ ...refineModal, isOpen: false })}
-                    originalText={refineModal.text}
-                    onAccept={handleRefineAccept}
-                />
-            )}
-
             <div className="border-b-2 border-stone-900 p-6 relative bg-[#f4f1ea]">
                 <div className="flex justify-between items-end mb-6">
                     <div>
@@ -208,15 +97,6 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                         >
                             <ChevronRight size={24} />
                         </button>
-
-                        {tourProps && (
-                            <TourTooltip
-                                stepIndex={3}
-                                text="Flip through sections here. Use the 'Complete' and 'Refine' buttons inside to write faster with AI."
-                                position="bottomLeft"
-                                {...tourProps}
-                            />
-                        )}
                     </div>
                 </div>
 
@@ -245,7 +125,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <span>1. Paraphrase the Question</span>
                                     <span className="text-[10px] font-sans font-normal text-stone-500 uppercase tracking-widest mt-1">Required • Write 1 Sentence</span>
                                 </label>
-                                <RefineButton section="intro" field="paraphrase" text={essay.intro.paraphrase} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current['intro-paraphrase'] = el)}
@@ -266,7 +146,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <span>2. Thesis Statement</span>
                                     <span className="text-[10px] font-sans font-normal text-stone-500 uppercase tracking-widest mt-1">Required • Write 1 Sentence</span>
                                 </label>
-                                <RefineButton section="intro" field="thesis" text={essay.intro.thesis} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current['intro-thesis'] = el)}
@@ -300,7 +180,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <label className="block text-lg font-bold font-serif text-stone-900">1. Topic Sentence</label>
                                     <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • The Main Idea</p>
                                 </div>
-                                <RefineButton section={`body${currentStep}`} field="topicSentence" text={essay[`body${currentStep}`].topicSentence} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current[`body${currentStep}-topicSentence`] = el)}
@@ -321,7 +201,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <label className="block text-lg font-bold font-serif text-stone-900">2. Explanation</label>
                                     <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Expand on the point</p>
                                 </div>
-                                <RefineButton section={`body${currentStep}`} field="explanation" text={essay[`body${currentStep}`].explanation} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current[`body${currentStep}-explanation`] = el)}
@@ -342,7 +222,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <label className="block text-lg font-bold font-serif text-stone-900">3. Example</label>
                                     <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Prove it</p>
                                 </div>
-                                <RefineButton section={`body${currentStep}`} field="example" text={essay[`body${currentStep}`].example} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current[`body${currentStep}-example`] = el)}
@@ -363,7 +243,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <label className="block text-lg font-bold font-serif text-stone-900">4. Link (Optional)</label>
                                     <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Tie it back</p>
                                 </div>
-                                <RefineButton section={`body${currentStep}`} field="concluding" text={essay[`body${currentStep}`].concluding} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current[`body${currentStep}-concluding`] = el)}
@@ -397,7 +277,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <label className="block text-lg font-bold font-serif text-stone-900">1. Summary</label>
                                     <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • The Recap</p>
                                 </div>
-                                <RefineButton section="conclusion" field="summary" text={essay.conclusion.summary} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current['conclusion-summary'] = el)}
@@ -418,7 +298,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                     <label className="block text-lg font-bold font-serif text-stone-900">2. Final Thought</label>
                                     <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Look to the future</p>
                                 </div>
-                                <RefineButton section="conclusion" field="finalThought" text={essay.conclusion.finalThought} />
+                                <ProBadge />
                             </div>
                             <textarea
                                 ref={(el) => (textareaRefs.current['conclusion-finalThought'] = el)}

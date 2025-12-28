@@ -1,8 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, PenTool, RefreshCw, Clock, RotateCcw, HelpCircle, Settings, Award } from 'lucide-react';
-import SettingsModal from './components/modals/SettingsModal';
-import ExaminerModal from './components/modals/ExaminerModal';
 import AboutModal from './components/modals/AboutModal';
 import StepWizard from './components/StepWizard';
 import PreviewSection from './components/PreviewSection';
@@ -29,8 +27,7 @@ const App = () => {
     const [timer, setTimer] = useState(0);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
-    const [showExaminer, setShowExaminer] = useState(false);
-    const [showSettings, setShowSettings] = useState(false);
+    const [showAbout, setShowAbout] = useState(false);
 
     const [tourStep, setTourStep] = useState(-1);
     const [hasSeenTour, setHasSeenTour] = useState(false);
@@ -221,6 +218,16 @@ const App = () => {
                         </button>
                     </div>
 
+                    <a
+                        href="https://pro.essay-architect.uk/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-stone-900 text-white px-6 py-2.5 font-serif font-black uppercase italic tracking-tighter hover:bg-yellow-400 hover:text-stone-900 transition-all flex items-center gap-2 group shadow-[4px_4px_0px_0px_rgba(28,25,23,0.2)]"
+                    >
+                        <Award size={16} className="text-yellow-400 group-hover:text-stone-900" />
+                        Go Pro Edition
+                    </a>
+
                     <div className="flex items-center gap-3 border-l-2 border-stone-300 pl-6 relative">
                         <div className="flex items-center gap-2 text-stone-900">
                             <Clock size={16} strokeWidth={3} className={isTimerRunning ? 'text-red-500 animate-pulse' : 'text-stone-400'} />
@@ -259,30 +266,10 @@ const App = () => {
                             {...tourProps}
                         />
                     </div>
-
-                    <div className="relative">
-                        <button onClick={() => setShowSettings(true)} className="text-stone-400 hover:text-stone-900 transition-colors">
-                            <Settings size={20} />
-                        </button>
-                        <TourTooltip
-                            stepIndex={5}
-                            text="Configure your API Key here to power the AI features."
-                            position="bottomRight"
-                            {...tourProps}
-                        />
-                    </div>
                 </div>
             </header>
 
             {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
-            {showSettings && <SettingsModal onClose={() => setShowSettings(false)} />}
-            {showExaminer && (
-                <ExaminerModal
-                    isOpen={showExaminer}
-                    onClose={() => setShowExaminer(false)}
-                    essayText={generateFullEssay()}
-                />
-            )}
 
             <main className="flex-1 overflow-hidden relative">
                 {activeTab === 'learn' && (
@@ -306,18 +293,18 @@ const App = () => {
                                     number="01"
                                 />
                                 <LearnCard
-                                    title="AI Refiner"
-                                    desc="Stuck? Get smart autocompletion and sentence polishing powered by Gemini."
+                                    title="AI Refiner (PRO)"
+                                    desc="Get smart autocompletion and sentence polishing powered by next-gen AI in our Pro version."
                                     number="02"
                                 />
                                 <LearnCard
-                                    title="The Examiner"
-                                    desc="Receive instant, strict grading and feedback based on official IELTS/PTE criteria."
+                                    title="AI Examiner (PRO)"
+                                    desc="Receive instant, strict grading and feedback based on official IELTS/PTE criteria in our Pro version."
                                     number="03"
                                 />
                                 <LearnCard
-                                    title="Privacy Core"
-                                    desc="Bring Your Own Key (BYOK). Your data and API key never leave your browser."
+                                    title="Upgrade Paths"
+                                    desc="Need more power? Switch to the Pro edition for unlimited AI assistance and grading."
                                     number="04"
                                 />
                             </div>
@@ -412,7 +399,7 @@ const App = () => {
                             <PreviewSection
                                 essay={essay}
                                 totalWordCount={totalWordCount}
-                                setShowExaminer={setShowExaminer}
+                                setShowExaminer={() => window.open('https://pro.essay-architect.uk/', '_blank')}
                                 copyToClipboard={copyToClipboard}
                                 tourProps={tourProps}
                             />
