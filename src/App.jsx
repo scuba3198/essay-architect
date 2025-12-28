@@ -207,7 +207,7 @@ const App = () => {
                         <div className="w-4 h-8 relative flex flex-col items-center justify-end">
                             <TourTooltip
                                 stepIndex={0}
-                                text="Switch between The Guide (Theory) and The Editor (Practice)."
+                                text="Switch between The Guide (Theory) and The Wizard (Practice)."
                                 position="bottom"
                                 {...tourProps}
                             />
@@ -217,7 +217,7 @@ const App = () => {
                             onClick={() => setActiveTab('practice')}
                             className={`text-sm font-bold uppercase tracking-wider transition-all duration-300 relative ml-4 ${activeTab === 'practice' ? 'text-stone-900 after:content-[""] after:absolute after:-bottom-2 after:left-0 after:w-full after:h-0.5 after:bg-stone-900' : 'text-stone-400 hover:text-stone-600'}`}
                         >
-                            The Editor
+                            The Wizard
                         </button>
                     </div>
 
@@ -295,7 +295,7 @@ const App = () => {
                                     ARCHITECT
                                 </h2>
                                 <p className="text-stone-900 text-xl font-serif max-w-2xl border-l-4 border-yellow-400 pl-6 italic">
-                                    Essay Architect isn't just a text editor—it's a comprehensive training ground. Here is how to get the most out of it.
+                                    Essay Architect isn't just a wizard—it's a comprehensive training ground. Here is how to get the most out of it.
                                 </p>
                             </div>
 
@@ -329,7 +329,7 @@ const App = () => {
                                 <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
                                     <div>
                                         <h3 className="font-serif font-black text-4xl mb-4">Ready to draft your first piece?</h3>
-                                        <p className="text-stone-400 mb-8 max-w-md">Put the theory into practice with our live editor. Real-time preview, word counting, and structure enforcement included.</p>
+                                        <p className="text-stone-400 mb-8 max-w-md">Put the theory into practice with our live wizard. Real-time preview, word counting, and structure enforcement included.</p>
                                         <button
                                             onClick={() => setActiveTab('practice')}
                                             className="bg-yellow-400 text-stone-900 px-8 py-4 font-black uppercase tracking-widest hover:bg-white transition-colors"

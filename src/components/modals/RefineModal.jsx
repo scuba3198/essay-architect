@@ -23,7 +23,7 @@ const RefineModal = ({ isOpen, onClose, originalText, onAccept }) => {
             const result = await callGemini(prompt);
             setSuggestion(result ? result.trim() : "Could not generate suggestion.");
         } catch (err) {
-            setError(err.message || "Failed to connect to the editor AI.");
+            setError(err.message || "Failed to connect to the wizard AI.");
         } finally {
             setLoading(false);
         }

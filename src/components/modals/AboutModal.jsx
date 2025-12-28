@@ -12,7 +12,7 @@ const AboutModal = ({ onClose }) => (
             className="bg-[#f4f1ea] border-2 border-stone-900 shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] max-w-lg w-full overflow-hidden relative transform transition-all scale-100 cursor-default"
         >
 
-            {/* Editorial Header */}
+            {/* Wizard Header */}
             <div className="bg-stone-900 p-8 text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-8 opacity-10">
                     <Type size={120} />
