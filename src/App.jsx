@@ -27,7 +27,6 @@ const App = () => {
     const [timer, setTimer] = useState(0);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
-    const [showAbout, setShowAbout] = useState(false);
 
     const [tourStep, setTourStep] = useState(-1);
     const [hasSeenTour, setHasSeenTour] = useState(false);
