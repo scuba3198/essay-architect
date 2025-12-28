@@ -2,7 +2,7 @@
 
 **Essay Architect** is a modern, AI-powered writing assistant designed to help students master the rigid structure required for high-scoring IELTS (Band 9) and PTE (90) essays.
 
-![Version](https://img.shields.io/badge/version-2.0-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Version](https://img.shields.io/badge/version-0.2-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ## 🚀 Live Demo
 **[https://essay-architect.uk/](https://essay-architect.uk/)**
