@@ -191,7 +191,7 @@ const App = () => {
                                 <HelpCircle size={18} />
                             </button>
                         </h1>
-                        <p className="hidden md:block text-[10px] font-bold text-stone-500 tracking-widest uppercase mt-1">v2.0 • IELTS & PTE Edition</p>
+                        <p className="hidden md:block text-[10px] font-bold text-stone-500 tracking-widest uppercase mt-1">v0.2 • IELTS & PTE Edition</p>
                     </div>
                 </div>
 
@@ -288,7 +288,7 @@ const App = () => {
                 {activeTab === 'learn' && (
                     <div className="h-full overflow-y-auto custom-scrollbar bg-[#f4f1ea]">
                         <div className="max-w-7xl mx-auto p-12">
-                    <div className="mb-16 border-b-4 border-stone-900 pb-12">
+                            <div className="mb-16 border-b-4 border-stone-900 pb-12">
                                 <h2 className="text-7xl md:text-8xl font-black font-serif text-stone-900 mb-6 tracking-tighter leading-[0.8]">
                                     MASTER <br />
                                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600" style={{ WebkitTextStroke: '2px #1c1917' }}>THE</span> <br />
