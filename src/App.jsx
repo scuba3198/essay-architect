@@ -288,36 +288,36 @@ const App = () => {
                 {activeTab === 'learn' && (
                     <div className="h-full overflow-y-auto custom-scrollbar bg-[#f4f1ea]">
                         <div className="max-w-7xl mx-auto p-12">
-                            <div className="mb-16 border-b-4 border-stone-900 pb-12">
+                    <div className="mb-16 border-b-4 border-stone-900 pb-12">
                                 <h2 className="text-7xl md:text-8xl font-black font-serif text-stone-900 mb-6 tracking-tighter leading-[0.8]">
-                                    THE <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600" style={{ WebkitTextStroke: '2px #1c1917' }}>STRUCTURE</span> <br />
-                                    ISSUE
+                                    MASTER <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600" style={{ WebkitTextStroke: '2px #1c1917' }}>THE</span> <br />
+                                    ARCHITECT
                                 </h2>
                                 <p className="text-stone-900 text-xl font-serif max-w-2xl border-l-4 border-yellow-400 pl-6 italic">
-                                    Scoring Band 7+ or 79+ isn't about fancy words—it's about reliable, rigid structure. Master the 4-paragraph template.
+                                    Essay Architect isn't just a text editor—it's a comprehensive training ground. Here is how to get the most out of it.
                                 </p>
                             </div>
 
                             <div className="grid md:grid-cols-4 gap-6 mb-16">
                                 <LearnCard
-                                    title="Intro"
-                                    desc="Paraphrase the question & give your Thesis. Keep it brief. 2-3 sentences max."
+                                    title="The Wizard"
+                                    desc="Breaks your essay into manageable chunks (Intro, Body, Conclusion) to enforce perfect structure."
                                     number="01"
                                 />
                                 <LearnCard
-                                    title="Body"
-                                    desc="Two strong paragraphs. Topic Sentence + Explanation + Evidence."
+                                    title="AI Refiner"
+                                    desc="Stuck? Get smart autocompletion and sentence polishing powered by Gemini."
                                     number="02"
                                 />
                                 <LearnCard
-                                    title="Link"
-                                    desc="Cohesion is key. Use linking words (However, Moreover) to flow."
+                                    title="The Examiner"
+                                    desc="Receive instant, strict grading and feedback based on official IELTS/PTE criteria."
                                     number="03"
                                 />
                                 <LearnCard
-                                    title="End"
-                                    desc="Summarize points. Restate opinion. No new ideas. Final thought."
+                                    title="Privacy Core"
+                                    desc="Bring Your Own Key (BYOK). Your data and API key never leave your browser."
                                     number="04"
                                 />
                             </div>
