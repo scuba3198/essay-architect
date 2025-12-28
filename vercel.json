@@ -1,0 +1,6 @@
+{
+    "deploymentProtection": {
+        "deploymentUrls": false,
+        "vircelWebAnalytics": false
+    }
+}
