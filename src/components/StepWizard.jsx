@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Wand2, Zap, Sparkles } from 'lucide-react';
 import { callGemini } from '../lib/api';
 import TourTooltip from './TourTooltip';
@@ -37,12 +37,31 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
     const currentStepData = steps[currentStep];
     const [refineModal, setRefineModal] = useState({ isOpen: false, text: '', section: '', field: '' });
     const [generatingField, setGeneratingField] = useState(null);
+    const textareaRefs = useRef({});
 
     const handleVocabularyInsert = (section, field, text) => {
+        const textarea = textareaRefs.current[`${section}-${field}`];
         const currentVal = essay[section][field] || '';
-        const spacer = currentVal.length > 0 && !currentVal.match(/\s$/) ? ' ' : '';
-        const newVal = currentVal + spacer + text;
-        handleInputChange(section, field, newVal);
+
+        if (textarea) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+
+            const newVal = currentVal.substring(0, start) + text + currentVal.substring(end);
+            handleInputChange(section, field, newVal);
+
+            // Re-focus and set cursor after replacement
+            setTimeout(() => {
+                textarea.focus();
+                const newCursorPos = start + text.length;
+                textarea.setSelectionRange(newCursorPos, newCursorPos);
+            }, 0);
+        } else {
+            // Fallback to append if ref is somehow missing
+            const spacer = currentVal.length > 0 && !currentVal.match(/\s$/) ? ' ' : '';
+            const newVal = currentVal + spacer + text;
+            handleInputChange(section, field, newVal);
+        }
     };
 
     const openRefine = (section, field, text) => {
@@ -229,6 +248,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section="intro" field="paraphrase" text={essay.intro.paraphrase} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current['intro-paraphrase'] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[120px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="Start writing here..."
                                 value={essay.intro.paraphrase}
@@ -249,6 +269,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section="intro" field="thesis" text={essay.intro.thesis} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current['intro-thesis'] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[120px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="I completely agree with this view because..."
                                 value={essay.intro.thesis}
@@ -282,6 +303,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section={`body${currentStep}`} field="topicSentence" text={essay[`body${currentStep}`].topicSentence} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current[`body${currentStep}-topicSentence`] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[80px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="Firstly, the main reason for this is..."
                                 value={essay[`body${currentStep}`].topicSentence}
@@ -302,6 +324,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section={`body${currentStep}`} field="explanation" text={essay[`body${currentStep}`].explanation} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current[`body${currentStep}-explanation`] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[100px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="This is because..."
                                 value={essay[`body${currentStep}`].explanation}
@@ -322,6 +345,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section={`body${currentStep}`} field="example" text={essay[`body${currentStep}`].example} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current[`body${currentStep}-example`] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[80px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="For instance..."
                                 value={essay[`body${currentStep}`].example}
@@ -342,6 +366,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section={`body${currentStep}`} field="concluding" text={essay[`body${currentStep}`].concluding} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current[`body${currentStep}-concluding`] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[80px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="Therefore..."
                                 value={essay[`body${currentStep}`].concluding}
@@ -375,6 +400,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section="conclusion" field="summary" text={essay.conclusion.summary} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current['conclusion-summary'] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[120px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="In conclusion..."
                                 value={essay.conclusion.summary}
@@ -395,6 +421,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                                 <RefineButton section="conclusion" field="finalThought" text={essay.conclusion.finalThought} />
                             </div>
                             <textarea
+                                ref={(el) => (textareaRefs.current['conclusion-finalThought'] = el)}
                                 className="w-full p-4 text-stone-900 text-lg leading-relaxed bg-[#f9f9f7] border-0 border-b-2 border-stone-300 focus:border-stone-900 focus:ring-0 focus:bg-yellow-50/30 transition-all min-h-[120px] resize-none placeholder:text-stone-300 placeholder:italic placeholder:font-serif"
                                 placeholder="It is predicted that..."
                                 value={essay.conclusion.finalThought}
