@@ -224,7 +224,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2 mb-4">
                                 <label className="flex flex-col text-lg font-bold font-serif text-stone-900">
                                     <span>1. Paraphrase the Question</span>
-                                    <span className="text-[10px] font-sans font-normal text-stone-500 uppercase tracking-widest mt-1">Required • Use Synonyms</span>
+                                    <span className="text-[10px] font-sans font-normal text-stone-500 uppercase tracking-widest mt-1">Required • Write 1 Sentence</span>
                                 </label>
                                 <RefineButton section="intro" field="paraphrase" text={essay.intro.paraphrase} />
                             </div>
@@ -244,7 +244,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2 mb-4">
                                 <label className="flex flex-col text-lg font-bold font-serif text-stone-900">
                                     <span>2. Thesis Statement</span>
-                                    <span className="text-[10px] font-sans font-normal text-stone-500 uppercase tracking-widest mt-1">Required • Your Opinion</span>
+                                    <span className="text-[10px] font-sans font-normal text-stone-500 uppercase tracking-widest mt-1">Required • Write 1 Sentence</span>
                                 </label>
                                 <RefineButton section="intro" field="thesis" text={essay.intro.thesis} />
                             </div>
@@ -277,7 +277,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2">
                                 <div>
                                     <label className="block text-lg font-bold font-serif text-stone-900">1. Topic Sentence</label>
-                                    <p className="text-xs font-mono text-stone-500 uppercase">The Main Idea</p>
+                                    <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • The Main Idea</p>
                                 </div>
                                 <RefineButton section={`body${currentStep}`} field="topicSentence" text={essay[`body${currentStep}`].topicSentence} />
                             </div>
@@ -297,7 +297,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2">
                                 <div>
                                     <label className="block text-lg font-bold font-serif text-stone-900">2. Explanation</label>
-                                    <p className="text-xs font-mono text-stone-500 uppercase">Expand on the point</p>
+                                    <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Expand on the point</p>
                                 </div>
                                 <RefineButton section={`body${currentStep}`} field="explanation" text={essay[`body${currentStep}`].explanation} />
                             </div>
@@ -317,7 +317,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2">
                                 <div>
                                     <label className="block text-lg font-bold font-serif text-stone-900">3. Example</label>
-                                    <p className="text-xs font-mono text-stone-500 uppercase">Prove it</p>
+                                    <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Prove it</p>
                                 </div>
                                 <RefineButton section={`body${currentStep}`} field="example" text={essay[`body${currentStep}`].example} />
                             </div>
@@ -337,7 +337,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2">
                                 <div>
                                     <label className="block text-lg font-bold font-serif text-stone-900">4. Link (Optional)</label>
-                                    <p className="text-xs font-mono text-stone-500 uppercase">Tie it back</p>
+                                    <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Tie it back</p>
                                 </div>
                                 <RefineButton section={`body${currentStep}`} field="concluding" text={essay[`body${currentStep}`].concluding} />
                             </div>
@@ -370,7 +370,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2">
                                 <div>
                                     <label className="block text-lg font-bold font-serif text-stone-900">1. Summary</label>
-                                    <p className="text-xs font-mono text-stone-500 uppercase">The Recap</p>
+                                    <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • The Recap</p>
                                 </div>
                                 <RefineButton section="conclusion" field="summary" text={essay.conclusion.summary} />
                             </div>
@@ -390,7 +390,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                             <div className="flex justify-between items-end border-b-2 border-stone-900 pb-2">
                                 <div>
                                     <label className="block text-lg font-bold font-serif text-stone-900">2. Final Thought</label>
-                                    <p className="text-xs font-mono text-stone-500 uppercase">Look to the future</p>
+                                    <p className="text-xs font-mono text-stone-500 uppercase">Write 1 Sentence • Look to the future</p>
                                 </div>
                                 <RefineButton section="conclusion" field="finalThought" text={essay.conclusion.finalThought} />
                             </div>
