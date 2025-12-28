@@ -1,6 +1,3 @@
 {
-    "deploymentProtection": {
-        "deploymentUrls": false,
-        "vircelWebAnalytics": false
-    }
+    "cleanUrls": true
 }
