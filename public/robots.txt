@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://essay-architect.com/sitemap.xml
+Sitemap: https://essay-architect.uk/sitemap.xml
