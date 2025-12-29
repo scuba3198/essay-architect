@@ -20,7 +20,6 @@ Looking for more power? The [Pro Edition](https://pro.essay-architect.uk/) inclu
 -   **AI Refiner**: Instant sentence polishing powered by Google Gemini.
 -   **AI Examiner**: Strict grading and feedback based on official criteria.
 -   **AI Autocomplete**: Stuck? Smart suggestions to keep your writing flow.
--   **BYOK**: Use your own API key for unlimited AI usage.
 
 ## 🛠️ Tech Stack
 
