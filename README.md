@@ -1,31 +1,34 @@
-# Essay Architect 🏛️
+# Essay Architect (Standard Edition) 🏛️
 
-**Essay Architect** is a modern, AI-powered writing assistant designed to help students master the rigid structure required for high-scoring IELTS (Band 9) and PTE (90) essays.
+**Essay Architect** is a modern, structured writing assistant designed to help students master the rigid structure required for high-scoring IELTS (Band 9) and PTE (90) essays.
 
 ![Version](https://img.shields.io/badge/version-0.2-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ## 🚀 Live Demo
 **[https://essay-architect.uk/](https://essay-architect.uk/)**
 
-## ✨ Features
+## ✨ Features (Standard Edition)
 
 -   **Structured Writing Wizard**: Breaks down the essay into manageable chunks (Intro, Body 1, Body 2, Conclusion) to enforce perfect structure.
--   **AI Refiner**: Uses Google Gemini to rewrite sentences instantly for better academic flow and vocabulary.
--   **AI Examiner**: Provides instant, strict grading and feedback based on official IELTS/PTE criteria.
--   **Autocomplete**: Stuck? The AI can suggest the next logical sentence based on your specific essay context.
--   **Live Preview & Analytics**: Real-time markdown rendering and word counting.
--   **"Bring Your Own Key" (BYOK)**: Privacy-first design. Your API Key is stored locally in your browser, never on our servers.
+-   **Vocabulary Assistant**: Context-aware academic phrase insertion (pills) to help you start sentences with professional transitions.
+-   **Live Preview & Analytics**: Real-time rendering of your full essay and word counting.
+-   **Interactive Tour**: Built-in guide to help you navigate the interface and understand the writing process.
+-   **Built-in Prompts**: Shuffle through a library of common IELTS/PTE essay topics.
+
+## 💎 Pro Edition Features
+Looking for more power? The [Pro Edition](https://pro.essay-architect.uk/) includes:
+-   **AI Refiner**: Instant sentence polishing powered by Google Gemini.
+-   **AI Examiner**: Strict grading and feedback based on official criteria.
+-   **AI Autocomplete**: Stuck? Smart suggestions to keep your writing flow.
+-   **BYOK**: Use your own API key for unlimited AI usage.
 
 ## 🛠️ Tech Stack
-
-This project was upgraded from a standalone prototype to a professional Single Page Application (SPA).
 
 -   **Framework**: [React v18](https://react.dev/)
 -   **Build Tool**: [Vite](https://vitejs.dev/)
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
--   **AI Integration**: [Google Gemini API](https://ai.google.dev/)
 -   **Icons**: [Lucide React](https://lucide.dev/)
--   **Deployment**: GitHub Actions & GitHub Pages
+-   **Deployment**: GitHub Actions & GitHub Pages (or Vercel)
 
 ## 🏃‍♂️ Running Locally
 
@@ -47,13 +50,13 @@ This project was upgraded from a standalone prototype to a professional Single P
 
 ## 🌍 Deployment
 
-This project relies on **GitHub Actions** for continuous deployment.
-Any push to the `main` branch automatically builds the React application and deploys it to GitHub Pages.
+This project is configured for deployment via **GitHub Actions**. Any push to the `main` branch automatically builds and deploys to GitHub Pages. It also includes a `vercel.json` for seamless Vercel deployment.
 
-### Custom Domain Configuration
+### Custom Domain Configuration (GitHub Pages)
 The site is configured to serve from `essay-architect.uk`.
 -   **CNAME**: Located in `public/CNAME`.
--   **DNS**: Managed via Cloudflare (pointing to `scuba3198.github.io`).
+-   **DNS**: Pointing to `scuba3198.github.io`.
 
 ## 📄 License
 This project is open source and available under the [MIT License](LICENSE).
+
