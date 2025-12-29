@@ -1,3 +1,8 @@
+/**
+ * MIT LICENSE - Essay Architect (Standard Edition)
+ * Copyright (c) 2025 Mumukshwa D.C.
+ * Permission is hereby granted under the terms of the MIT License.
+ */
 
 import React, { useRef } from 'react';
 import { ChevronLeft, ChevronRight, Zap } from 'lucide-react';
