@@ -1,3 +1,8 @@
+/**
+ * MIT LICENSE - Essay Architect (Standard Edition)
+ * Copyright (c) 2025 Mumukshwa D.C.
+ * Permission is hereby granted under the terms of the MIT License.
+ */
 
 import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, PenTool, RefreshCw, Clock, RotateCcw, HelpCircle, Settings, Award } from 'lucide-react';
