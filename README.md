@@ -1,10 +1,8 @@
 # ⚠️ ARCHIVED - This Repository is No Longer Maintained
 
-> **This project has been archived.** All future development has moved to **[Essay Architect Pro](https://github.com/scuba3198/essay-architect-pro)**.
+> **This project has been archived.** All future development has moved to **Essay Architect Pro**.
 >
-> 🚀 **Visit the new repo:** [https://github.com/scuba3198/essay-architect-pro](https://github.com/scuba3198/essay-architect-pro)
->
-> 🌐 **Live App:** [https://pro.essay-architect.uk/](https://pro.essay-architect.uk/)
+> 🌐 **Try the Pro version:** [https://pro.essay-architect.uk/](https://pro.essay-architect.uk/)
 
 ---
 
