@@ -1,3 +1,13 @@
+# ⚠️ ARCHIVED - This Repository is No Longer Maintained
+
+> **This project has been archived.** All future development has moved to **[Essay Architect Pro](https://github.com/scuba3198/essay-architect-pro)**.
+>
+> 🚀 **Visit the new repo:** [https://github.com/scuba3198/essay-architect-pro](https://github.com/scuba3198/essay-architect-pro)
+>
+> 🌐 **Live App:** [https://pro.essay-architect.uk/](https://pro.essay-architect.uk/)
+
+---
+
 # Essay Architect (Standard Edition) 🏛️
 
 **Essay Architect** is a modern, structured writing assistant designed to help students master the rigid structure required for high-scoring IELTS (Band 9) and PTE (90) essays.
