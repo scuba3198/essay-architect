@@ -117,3 +117,6 @@ dist
 
 # Vite
 dist
+
+# Git worktrees
+.worktrees
