@@ -32,6 +32,9 @@ const App = () => {
     const [timer, setTimer] = useState(0);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
+    const [mobileView, setMobileView] = useState('write'); // 'write' | 'preview'
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
     const [tourStep, setTourStep] = useState(-1);
     const [hasSeenTour, setHasSeenTour] = useState(false);
@@ -94,6 +97,22 @@ const App = () => {
         }
         return () => clearInterval(interval);
     }, [isTimerRunning]);
+
+    // Keyboard detection for mobile
+    useEffect(() => {
+        const handleResize = () => {
+            const isOpen = window.innerHeight < window.screen.height * 0.75;
+            setIsKeyboardOpen(isOpen);
+        };
+
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', handleResize);
+            return () => window.visualViewport.removeEventListener('resize', handleResize);
+        } else {
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+        }
+    }, []);
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
