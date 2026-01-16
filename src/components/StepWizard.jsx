@@ -10,7 +10,7 @@ import TourTooltip from './TourTooltip';
 
 const VocabularyPill = ({ words, onSelect }) => {
     return (
-        <div className="flex flex-wrap gap-3 mt-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
+        <div className="flex flex-wrap gap-2 md:gap-3 mt-4 animate-in fade-in slide-in-from-bottom-2 duration-500">
             {words.map((word, idx) => (
                 <button
                     key={idx}
@@ -18,10 +18,10 @@ const VocabularyPill = ({ words, onSelect }) => {
                         e.preventDefault();
                         if (onSelect) onSelect(word);
                     }}
-                    className="group relative inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide bg-white border border-stone-900 text-stone-900 px-4 py-2 hover:bg-stone-900 hover:text-white transition-all duration-200 shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+                    className="group relative inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide bg-white border border-stone-900 text-stone-900 px-3 md:px-4 py-3 min-h-[44px] active:bg-stone-900 active:text-white active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all duration-200 shadow-[2px_2px_0px_0px_rgba(28,25,23,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
                     title="Click to insert into text box"
                 >
-                    <span className="group-hover:pl-2 transition-all">{word}</span>
+                    <span className="group-hover:pl-2 group-active:pl-2 transition-all">{word}</span>
                 </button>
             ))}
         </div>
