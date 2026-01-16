@@ -10,6 +10,7 @@ import AboutModal from './components/modals/AboutModal';
 import StepWizard from './components/StepWizard';
 import PreviewSection from './components/PreviewSection';
 import TourTooltip from './components/TourTooltip';
+import MobileHeader from './components/MobileHeader';
 
 const LearnCard = ({ title, desc, number }) => (
     <div className="group border-2 border-stone-900 bg-white hover:bg-stone-900 hover:text-white transition-all cursor-default relative overflow-hidden p-6 flex flex-col justify-between min-h-[220px]">
@@ -195,8 +196,8 @@ const App = () => {
     };
 
     return (
-        <div className="h-screen bg-[#f4f1ea] text-stone-900 font-sans flex flex-col overflow-hidden selection:bg-yellow-300 selection:text-stone-900">
-            <header className="bg-[#f4f1ea] border-b-2 border-stone-900 px-6 py-5 flex justify-between items-center z-50 sticky top-0">
+        <div className="min-h-screen bg-[#f4f1ea] text-stone-900 font-sans flex flex-col md:h-screen md:overflow-hidden selection:bg-yellow-300 selection:text-stone-900">
+            <header className="hidden md:flex bg-[#f4f1ea] border-b-2 border-stone-900 px-6 py-5 justify-between items-center z-50 sticky top-0">
                 <div className="flex items-center gap-6">
                     <div className="bg-stone-900 text-white w-10 h-10 flex items-center justify-center font-serif font-black text-xl">
                         E
@@ -251,7 +252,7 @@ const App = () => {
                         Go Pro Edition
                     </a>
 
-                    <div className="flex items-center gap-3 border-l-2 border-stone-300 pl-6 relative">
+                    <div className="hidden md:flex items-center gap-3 border-l-2 border-stone-300 pl-6 relative">
                         <div className="flex items-center gap-2 text-stone-900">
                             <Clock size={16} strokeWidth={3} className={isTimerRunning ? 'text-red-500 animate-pulse' : 'text-stone-400'} />
                             <span className="font-mono font-bold w-[3rem] text-center text-sm">{formatTime(timer)}</span>
@@ -291,6 +292,18 @@ const App = () => {
                     </div>
                 </div>
             </header>
+
+            {/* Mobile-only header */}
+            <MobileHeader
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+                timer={timer}
+                isTimerRunning={isTimerRunning}
+                setIsTimerRunning={setIsTimerRunning}
+                setTimer={setTimer}
+                isMenuOpen={isMobileMenuOpen}
+                setIsMenuOpen={setIsMobileMenuOpen}
+            />
 
             {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
 
