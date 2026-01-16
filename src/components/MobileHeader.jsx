@@ -90,7 +90,7 @@ const MobileHeader = ({
                                     </button>
                                     <button
                                         onClick={() => { setIsTimerRunning(false); setTimer(0); }}
-                                        className="flex-1 py-3 border-2 border-stone-900 bg-white text-stone-400 active:bg-red-500 active:text-white active:border-red-500 transition-colors font-bold uppercase text-sm"
+                                        className="flex-1 py-3 border-2 border-stone-900 bg-white text-stone-900 active:bg-red-500 active:text-white active:border-red-500 transition-colors font-bold uppercase text-sm"
                                     >
                                         Reset
                                     </button>
