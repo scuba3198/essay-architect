@@ -4,7 +4,7 @@
  * Permission is hereby granted under the terms of the MIT License.
  */
 
-import { X, Clock } from 'lucide-react';
+import { Menu, X, Clock } from 'lucide-react';
 
 const MobileHeader = ({
     activeTab,
@@ -27,12 +27,13 @@ const MobileHeader = ({
     return (
         <>
             <header className="bg-[#f4f1ea] border-b-2 border-stone-900 px-4 py-3 flex justify-between items-center z-50 md:hidden">
-                {/* Logo - toggles menu */}
+                {/* Hamburger menu button */}
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="bg-stone-900 text-white w-10 h-10 flex items-center justify-center font-serif font-black text-xl active:bg-stone-700 transition-colors"
+                    className="text-stone-900 active:bg-stone-200 p-2 rounded transition-colors"
+                    aria-label="Open menu"
                 >
-                    {isMenuOpen ? <X size={20} /> : 'E'}
+                    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
 
                 {/* Current view title */}
@@ -40,14 +41,8 @@ const MobileHeader = ({
                     {tabTitle}
                 </h1>
 
-                {/* Timer - simplified */}
-                <button
-                    onClick={() => setIsTimerRunning(!isTimerRunning)}
-                    className="flex items-center gap-2 text-stone-900 active:bg-stone-200 px-2 py-1 rounded transition-colors"
-                >
-                    <Clock size={16} strokeWidth={3} className={isTimerRunning ? 'text-red-500 animate-pulse' : 'text-stone-400'} />
-                    <span className="font-mono font-bold text-sm">{formatTime(timer)}</span>
-                </button>
+                {/* Spacer for balance */}
+                <div className="w-8"></div>
             </header>
 
             {/* Expandable menu overlay */}
@@ -59,6 +54,12 @@ const MobileHeader = ({
                     />
                     <div className="absolute top-[60px] left-0 right-0 bg-white border-b-2 border-stone-900 z-50 md:hidden animate-in slide-in-from-top-2 duration-200">
                         <div className="p-4 space-y-4">
+                            {/* Timer display at top */}
+                            <div className="flex items-center justify-center gap-3 bg-[#f4f1ea] border-2 border-stone-900 p-4">
+                                <Clock size={20} className={isTimerRunning ? 'text-red-500 animate-pulse' : 'text-stone-900'} />
+                                <span className="font-mono font-black text-2xl">{formatTime(timer)}</span>
+                            </div>
+
                             {/* Tab navigation */}
                             <div className="flex gap-2">
                                 <button
@@ -76,33 +77,23 @@ const MobileHeader = ({
                             </div>
 
                             {/* Full timer controls */}
-                            <div className="flex items-center justify-between bg-[#f4f1ea] border-2 border-stone-900 p-3">
-                                <span className="font-bold text-sm uppercase tracking-wider">Timer</span>
-                                <div className="flex items-center gap-3">
-                                    <span className="font-mono font-black text-xl">{formatTime(timer)}</span>
-                                    <div className="flex gap-1">
-                                        <button
-                                            onClick={() => setIsTimerRunning(!isTimerRunning)}
-                                            className="w-10 h-10 flex items-center justify-center border border-stone-900 bg-white active:bg-stone-900 active:text-white transition-colors"
-                                        >
-                                            {isTimerRunning ? (
-                                                <div className="flex gap-[2px]">
-                                                    <div className="w-0.5 h-2 bg-current" />
-                                                    <div className="w-0.5 h-2 bg-current" />
-                                                </div>
-                                            ) : (
-                                                <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[6px] border-l-current border-b-[4px] border-b-transparent ml-0.5" />
-                                            )}
-                                        </button>
-                                        <button
-                                            onClick={() => { setIsTimerRunning(false); setTimer(0); }}
-                                            className="w-10 h-10 flex items-center justify-center border border-stone-900 bg-white text-stone-400 active:bg-red-500 active:text-white active:border-red-500 transition-colors"
-                                        >
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 12"/>
-                                            </svg>
-                                        </button>
-                                    </div>
+                            <div className="bg-[#f4f1ea] border-2 border-stone-900 p-3">
+                                <div className="flex items-center justify-between mb-2">
+                                    <span className="font-bold text-xs uppercase tracking-wider text-stone-500">Timer Controls</span>
+                                </div>
+                                <div className="flex justify-center gap-2">
+                                    <button
+                                        onClick={() => setIsTimerRunning(!isTimerRunning)}
+                                        className="flex-1 py-3 border-2 border-stone-900 bg-white active:bg-stone-900 active:text-white transition-colors font-bold uppercase text-sm"
+                                    >
+                                        {isTimerRunning ? 'Pause' : 'Start'}
+                                    </button>
+                                    <button
+                                        onClick={() => { setIsTimerRunning(false); setTimer(0); }}
+                                        className="flex-1 py-3 border-2 border-stone-900 bg-white text-stone-400 active:bg-red-500 active:text-white active:border-red-500 transition-colors font-bold uppercase text-sm"
+                                    >
+                                        Reset
+                                    </button>
                                 </div>
                             </div>
 
