@@ -87,7 +87,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                         </h2>
                     </div>
 
-                    <div className="flex gap-0 relative">
+                    <div className="hidden md:flex gap-0 relative">
                         <button
                             onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
                             disabled={currentStep === 0}
@@ -315,6 +315,23 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                         </div>
                     </div>
                 )}
+            </div>
+            {/* Mobile bottom navigation */}
+            <div className="md:hidden flex gap-0 p-4 pt-0 border-t-2 border-stone-900 bg-white">
+                <button
+                    onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
+                    disabled={currentStep === 0}
+                    className="flex-1 py-4 border-2 border-stone-900 border-r-0 flex items-center justify-center text-stone-900 bg-white active:bg-stone-900 active:text-white disabled:opacity-20 disabled:active:bg-white disabled:active:text-stone-900 transition-colors font-bold uppercase tracking-wider min-h-[52px]"
+                >
+                    Previous
+                </button>
+                <button
+                    onClick={() => setCurrentStep(Math.min(3, currentStep + 1))}
+                    disabled={currentStep === 3}
+                    className="flex-1 py-4 border-2 border-stone-900 flex items-center justify-center text-stone-900 bg-white active:bg-stone-900 active:text-white disabled:opacity-20 disabled:active:bg-white disabled:active:text-stone-900 transition-colors font-bold uppercase tracking-wider min-h-[52px]"
+                >
+                    {currentStep === 3 ? 'Finish' : 'Next'}
+                </button>
             </div>
         </div>
     );
