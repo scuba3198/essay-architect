@@ -45,18 +45,18 @@ const PreviewSection = ({ essay, totalWordCount, setShowExaminer, copyToClipboar
                 </div>
             </div>
 
-            <div className="p-0 z-20 flex border-t-2 border-stone-900">
+            <div className="p-0 z-20 flex flex-col md:flex-row border-t-2 border-stone-900">
                 <button
                     onClick={() => setShowExaminer(true)}
                     disabled={totalWordCount < 50}
-                    className="w-1/2 bg-stone-900 text-white py-6 font-black uppercase tracking-widest hover:bg-yellow-400 hover:text-stone-900 transition-colors text-sm border-r-2 border-stone-900 disabled:opacity-50 disabled:hover:bg-stone-900 disabled:hover:text-white"
+                    className="w-full md:w-1/2 bg-stone-900 text-white py-5 md:py-6 font-black uppercase tracking-widest active:bg-yellow-400 active:text-stone-900 transition-colors text-sm border-b-2 md:border-b-0 md:border-r-2 border-stone-900 disabled:opacity-50 disabled:active:bg-stone-900 disabled:active:text-white min-h-[52px]"
                 >
                     Get Feedback
                 </button>
                 <button
                     id="copyBtn"
                     onClick={copyToClipboard}
-                    className="w-1/2 bg-white text-stone-900 py-6 font-black uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-colors text-sm"
+                    className="w-full md:w-1/2 bg-white text-stone-900 py-5 md:py-6 font-black uppercase tracking-widest active:bg-stone-900 active:text-white transition-colors text-sm min-h-[52px]"
                 >
                     Copy
                 </button>
