@@ -125,7 +125,7 @@ const App = () => {
                 setMobileView('preview');
             }
         }
-    }, [currentStep, essay, mobileView, activeTab]);
+    }, [currentStep, essay, activeTab]);
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
