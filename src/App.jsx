@@ -42,6 +42,7 @@ const App = () => {
     const [hasSeenTour, setHasSeenTour] = useState(false);
 
     const promptRef = useRef(null);
+    const hasAutoSwitchedRef = useRef(false);
 
     const [essay, setEssay] = useState({
         intro: { paraphrase: '', thesis: '' },
@@ -121,11 +122,16 @@ const App = () => {
         const isMobile = window.innerWidth < 768;
         if (isMobile && currentStep === 3 && activeTab === 'practice') {
             const hasContent = Object.values(essay.conclusion).some(v => v.trim().length > 0);
-            if (hasContent && mobileView === 'write') {
+            if (hasContent && mobileView === 'write' && !hasAutoSwitchedRef.current) {
+                hasAutoSwitchedRef.current = true;
                 setMobileView('preview');
             }
+            // Reset flag if user goes back to earlier steps
+            if (currentStep !== 3) {
+                hasAutoSwitchedRef.current = false;
+            }
         }
-    }, [currentStep, essay, activeTab, mobileView]);
+    }, [currentStep, essay, mobileView, activeTab]);
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);

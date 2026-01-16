@@ -10,7 +10,7 @@ const MobileTabBar = ({ currentView, setCurrentView, isKeyboardOpen }) => {
     if (isKeyboardOpen) return null; // Hide when keyboard is open
 
     return (
-        <div className="mobile-tab-bar fixed bottom-8 left-0 right-0 bg-white border-t-2 border-stone-900 z-40 md:hidden">
+        <div className="mobile-tab-bar fixed bottom-0 left-0 right-0 bg-white border-t-2 border-stone-900 z-40 md:hidden">
             <div className="flex">
                 <button
                     onClick={() => setCurrentView('write')}

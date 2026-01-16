@@ -44,7 +44,7 @@ const PreviewSection = ({ essay, totalWordCount, setShowExaminer, copyToClipboar
                 </div>
             </div>
 
-            <div className="p-0 z-20 flex flex-col md:flex-row border-t-2 border-stone-900">
+            <div className="p-0 pb-16 md:pb-0 z-20 flex flex-col md:flex-row border-t-2 border-stone-900">
                 <button
                     onClick={() => setShowExaminer(true)}
                     disabled={totalWordCount < 50}
