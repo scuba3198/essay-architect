@@ -11,6 +11,7 @@ import StepWizard from './components/StepWizard';
 import PreviewSection from './components/PreviewSection';
 import TourTooltip from './components/TourTooltip';
 import MobileHeader from './components/MobileHeader';
+import MobileTabBar from './components/MobileTabBar';
 
 const LearnCard = ({ title, desc, number }) => (
     <div className="group border-2 border-stone-900 bg-white hover:bg-stone-900 hover:text-white transition-all cursor-default relative overflow-hidden p-6 flex flex-col justify-between min-h-[220px]">
@@ -378,9 +379,10 @@ const App = () => {
 
                 {activeTab === 'practice' && (
                     <div className="flex flex-col md:flex-row h-full">
-                        <div className="w-full md:w-3/5 p-0 overflow-y-auto custom-scrollbar bg-[#f4f1ea] border-r-2 border-stone-900">
-                            <div className="p-8 pb-4">
-                                <div className="border-2 border-stone-900 bg-white p-6 relative shadow-[8px_8px_0px_0px_rgba(28,25,23,0.1)] hover:shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] transition-shadow duration-300">
+                        {/* Mobile: Show based on current view */}
+                        <div className={`w-full md:w-3/5 ${mobileView === 'preview' ? 'hidden md:block' : ''} p-0 overflow-y-auto custom-scrollbar bg-[#f4f1ea] border-r-0 md:border-r-2 border-stone-900`}>
+                            <div className="p-4 md:p-8 pb-4">
+                                <div className="border-2 border-stone-900 bg-white p-4 md:p-6 relative shadow-[8px_8px_0px_0px_rgba(28,25,23,0.1)] hover:shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] transition-shadow duration-300">
                                     <div className="flex justify-between items-start mb-4 border-b border-stone-200 pb-4">
                                         <span className="text-[10px] font-black text-stone-900 uppercase tracking-widest flex items-center gap-2">
                                             <span className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></span>
@@ -389,7 +391,7 @@ const App = () => {
                                         <div className="relative z-20">
                                             <button
                                                 onClick={getNewRandomTopic}
-                                                className="text-stone-400 hover:text-stone-900 transition-colors flex items-center gap-1 text-xs font-bold uppercase tracking-wider"
+                                                className="text-stone-400 hover:text-stone-900 transition-colors flex items-center gap-2 text-xs font-bold uppercase tracking-wider py-2 active:text-stone-900"
                                                 title="Get new random topic"
                                             >
                                                 <RefreshCw size={12} /> New Prompt
@@ -405,21 +407,21 @@ const App = () => {
                                     <div className="relative group">
                                         <textarea
                                             ref={promptRef}
-                                            className={`w-full text-stone-900 font-serif font-bold leading-tight bg-transparent border-0 p-0 resize-none outline-none placeholder:text-stone-300 overflow-hidden ${(topic?.question?.length || 0) > 150 ? 'text-xs' : (topic?.question?.length || 0) > 80 ? 'text-sm' : 'text-lg'
+                                            className={`w-full text-stone-900 font-serif font-bold leading-tight bg-transparent border-0 p-0 resize-none outline-none placeholder:text-stone-300 overflow-hidden ${(topic?.question?.length || 0) > 150 ? 'text-xs' : (topic?.question?.length || 0) > 80 ? 'text-sm' : 'text-base md:text-lg'
                                                 }`}
                                             value={topic?.question || ''}
                                             onChange={handleTopicChange}
                                             rows={1}
                                             placeholder="Type your essay question here..."
                                         />
-                                        <div className="absolute right-0 bottom-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <div className="absolute right-0 bottom-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
                                             <PenTool size={14} className="text-stone-300" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="pb-20 md:pb-0 min-h-[500px] p-8 pt-0">
+                            <div className="pb-24 md:pb-0 min-h-[500px] p-4 md:p-8 pt-0">
                                 <StepWizard
                                     currentStep={currentStep}
                                     setCurrentStep={setCurrentStep}
@@ -431,7 +433,8 @@ const App = () => {
                             </div>
                         </div>
 
-                        <div className="w-full md:w-2/5 h-80 md:h-auto border-t-2 md:border-t-0 border-stone-900 relative z-10 bg-white">
+                        {/* Mobile: Show based on current view */}
+                        <div className={`w-full md:w-2/5 h-auto md:h-auto border-t-2 md:border-t-0 border-stone-900 relative z-10 bg-white ${mobileView === 'write' ? 'hidden md:block' : ''}`}>
                             <PreviewSection
                                 essay={essay}
                                 totalWordCount={totalWordCount}
@@ -440,6 +443,13 @@ const App = () => {
                                 tourProps={tourProps}
                             />
                         </div>
+
+                        {/* Mobile tab bar */}
+                        <MobileTabBar
+                            currentView={mobileView}
+                            setCurrentView={setMobileView}
+                            isKeyboardOpen={isKeyboardOpen}
+                        />
                     </div>
                 )}
             </main>
