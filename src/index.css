@@ -39,3 +39,65 @@ body {
 .column-count-1 {
   column-count: 1;
 }
+
+/* Mobile tab bar animation */
+.mobile-tab-bar {
+    animation: slideUpFromBottom 0.3s ease-out;
+}
+
+@keyframes slideUpFromBottom {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Keyboard state - hide tab bar */
+.keyboard-open .mobile-tab-bar {
+    display: none;
+}
+
+/* Touch-friendly tap target sizing */
+@media (max-width: 767px) {
+    button, a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Textarea focus adjustment for mobile keyboard */
+    textarea:focus {
+        scroll-margin-bottom: 80px;
+    }
+}
+
+/* Hide scrollbar on mobile but keep functionality */
+@media (max-width: 767px) {
+    .custom-scrollbar {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Smooth page transitions */
+.view-transition {
+    animation: fadeInSlide 0.2s ease-out;
+}
+
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
