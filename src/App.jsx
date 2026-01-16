@@ -116,6 +116,17 @@ const App = () => {
         }
     }, []);
 
+    // Auto-switch to preview on mobile when completing final step
+    useEffect(() => {
+        const isMobile = window.innerWidth < 768;
+        if (isMobile && currentStep === 3 && activeTab === 'practice') {
+            const hasContent = Object.values(essay.conclusion).some(v => v.trim().length > 0);
+            if (hasContent && mobileView === 'write') {
+                setMobileView('preview');
+            }
+        }
+    }, [currentStep, essay, mobileView, activeTab]);
+
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
