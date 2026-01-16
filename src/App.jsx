@@ -131,6 +131,9 @@ const App = () => {
     };
 
     const skipTour = () => {
+        if (window.innerWidth < 768) {
+            localStorage.setItem('essay-architect-mobile-tour-seen', 'true');
+        }
         setTourStep(-1);
     };
 

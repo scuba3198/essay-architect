@@ -4,17 +4,23 @@ import React from 'react';
 const TourTooltip = ({ stepIndex, currentStep, onNext, onSkip, text, position = "bottom" }) => {
     if (currentStep !== stepIndex) return null;
 
+    // Check if user has dismissed tour on mobile
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+        const hasSeenMobileTour = localStorage.getItem('essay-architect-mobile-tour-seen');
+        if (hasSeenMobileTour && stepIndex === 0) return null;
+    }
+
     const positionClasses = {
-        bottom: "top-full left-1/2 -translate-x-1/2 mt-6",
-        top: "bottom-full left-1/2 -translate-x-1/2 mb-6",
-        left: "right-full top-1/2 -translate-y-1/2 mr-6",
-        right: "left-full top-1/2 -translate-y-1/2 ml-6",
-        bottomLeft: "top-full right-0 mt-6",
-        bottomRight: "top-full left-0 mt-6",
+        bottom: "top-full left-1/2 -translate-x-1/2 mt-4 md:mt-6",
+        top: "bottom-full left-1/2 -translate-x-1/2 mb-4 md:mb-6",
+        left: "right-full top-1/2 -translate-y-1/2 mr-4 md:mr-6",
+        right: "left-full top-1/2 -translate-y-1/2 ml-4 md:ml-6",
+        bottomLeft: "top-full right-0 mt-4 md:mt-6",
+        bottomRight: "top-full left-0 mt-4 md:mt-6",
     };
 
     return (
-        <div className={`absolute z-50 w-72 bg-yellow-400 border-2 border-stone-900 text-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] p-0 ${positionClasses[position] || positionClasses.bottom} animate-in fade-in zoom-in duration-300`}>
+        <div className={`absolute z-50 w-64 md:w-72 bg-yellow-400 border-2 border-stone-900 text-stone-900 shadow-[8px_8px_0px_0px_rgba(28,25,23,1)] p-0 ${positionClasses[position] || positionClasses.bottom} animate-in fade-in zoom-in duration-300`}>
             <div className={`absolute bg-stone-900
             ${position === 'bottom' ? '-top-6 left-1/2 w-0.5 h-6' : ''}
             ${position === 'top' ? '-bottom-6 left-1/2 w-0.5 h-6' : ''}
