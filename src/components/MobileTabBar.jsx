@@ -4,7 +4,6 @@
  * Permission is hereby granted under the terms of the MIT License.
  */
 
-import React from 'react';
 import { PenTool, FileText } from 'lucide-react';
 
 const MobileTabBar = ({ currentView, setCurrentView, isKeyboardOpen }) => {

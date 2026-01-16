@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { X, Type, Wand2, Sparkles, GraduationCap, Settings } from 'lucide-react';
 
 const AboutModal = ({ onClose }) => (
@@ -34,7 +33,7 @@ const AboutModal = ({ onClose }) => (
 
             <div className="p-8 space-y-6">
                 <div className="font-serif text-xl leading-relaxed text-stone-800 border-l-4 border-yellow-400 pl-4 italic">
-                    "Structure is not just a framework; it is the skeleton upon which your ideas must hang."
+                    &ldquo;Structure is not just a framework; it is the skeleton upon which your ideas must hang.&rdquo;
                 </div>
 
                 <p className="text-stone-600 font-sans leading-relaxed text-sm">
@@ -46,7 +45,7 @@ const AboutModal = ({ onClose }) => (
                         <div className="bg-stone-900 text-white p-2 shrink-0"><Wand2 size={16} /></div>
                         <div>
                             <p className="font-bold text-stone-900 uppercase text-[10px] tracking-wider">AI Autocomplete</p>
-                            <p className="text-[10px] text-stone-500 font-serif">Stuck? Click 'Complete' to generate the perfect next sentence.</p>
+                            <p className="text-[10px] text-stone-500 font-serif">Stuck? Click &apos;Complete&apos; to generate the perfect next sentence.</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-3 p-3 border border-stone-200 bg-white">

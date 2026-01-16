@@ -1,6 +1,4 @@
 
-import React from 'react';
-
 const TourTooltip = ({ stepIndex, currentStep, onNext, onSkip, text, position = "bottom" }) => {
     if (currentStep !== stepIndex) return null;
 

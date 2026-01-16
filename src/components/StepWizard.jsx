@@ -4,9 +4,8 @@
  * Permission is hereby granted under the terms of the MIT License.
  */
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { ChevronLeft, ChevronRight, Zap } from 'lucide-react';
-import TourTooltip from './TourTooltip';
 
 const VocabularyPill = ({ words, onSelect }) => {
     return (
@@ -28,7 +27,7 @@ const VocabularyPill = ({ words, onSelect }) => {
     );
 };
 
-const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tourProps }) => {
+const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange }) => {
     const steps = [
         { id: 'intro', title: 'The Introduction', subtitle: 'Set the Stage', icon: "I" },
         { id: 'body1', title: 'The First Argument', subtitle: 'Point, Explain, Evidence', icon: "II" },
@@ -117,7 +116,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                     <div className="space-y-10 animate-in slide-in-from-right-8 duration-500">
                         <div className="bg-stone-50 p-6 border-l-4 border-stone-900">
                             <div className="flex gap-3">
-                                <div className="font-serif font-bold text-4xl text-stone-200 leading-none">"</div>
+                                <div className="font-serif font-bold text-4xl text-stone-200 leading-none">&ldquo;</div>
                                 <div className="text-sm font-serif text-stone-800 italic leading-relaxed">
                                     Your goal is simple: Introduce the topic and state your position clearly. Never copy the question directly!
                                 </div>
@@ -172,7 +171,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                     <div className="space-y-10 animate-in slide-in-from-right-8 duration-500">
                         <div className="bg-stone-50 p-6 border-l-4 border-stone-900">
                             <div className="flex gap-3">
-                                <div className="font-serif font-bold text-4xl text-stone-200 leading-none">"</div>
+                                <div className="font-serif font-bold text-4xl text-stone-200 leading-none">&ldquo;</div>
                                 <div className="text-sm font-serif text-stone-800 italic leading-relaxed">
                                     Focus on ONE main idea. Support it with an explanation and a concrete example.
                                 </div>
@@ -269,7 +268,7 @@ const StepWizard = ({ currentStep, setCurrentStep, essay, handleInputChange, tou
                     <div className="space-y-10 animate-in slide-in-from-right-8 duration-500">
                         <div className="bg-stone-50 p-6 border-l-4 border-stone-900">
                             <div className="flex gap-3">
-                                <div className="font-serif font-bold text-4xl text-stone-200 leading-none">"</div>
+                                <div className="font-serif font-bold text-4xl text-stone-200 leading-none">&ldquo;</div>
                                 <div className="text-sm font-serif text-stone-800 italic leading-relaxed">
                                     Summarize main points. <span className="bg-stone-900 text-white px-1">DO NOT</span> introduce new arguments here.
                                 </div>

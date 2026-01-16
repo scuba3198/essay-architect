@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { Type } from 'lucide-react';
 import TourTooltip from './TourTooltip';
 

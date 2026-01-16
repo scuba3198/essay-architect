@@ -4,8 +4,7 @@
  * Permission is hereby granted under the terms of the MIT License.
  */
 
-import React from 'react';
-import { Menu, X, Clock } from 'lucide-react';
+import { X, Clock } from 'lucide-react';
 
 const MobileHeader = ({
     activeTab,

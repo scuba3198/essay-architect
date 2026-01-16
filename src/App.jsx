@@ -4,8 +4,8 @@
  * Permission is hereby granted under the terms of the MIT License.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
-import { BookOpen, PenTool, RefreshCw, Clock, RotateCcw, HelpCircle, Settings, Award } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { PenTool, RefreshCw, Clock, RotateCcw, HelpCircle, Award } from 'lucide-react';
 import AboutModal from './components/modals/AboutModal';
 import StepWizard from './components/StepWizard';
 import PreviewSection from './components/PreviewSection';
@@ -65,14 +65,14 @@ const App = () => {
 
     useEffect(() => {
         setTopic(topics[0]);
-    }, []);
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         if (activeTab === 'practice' && !hasSeenTour) {
             setTourStep(0);
             setHasSeenTour(true);
         }
-    }, [activeTab]);
+    }, [activeTab, hasSeenTour]);
 
     // Auto-resize prompt textarea
     const adjustHeight = () => {
@@ -125,7 +125,7 @@ const App = () => {
                 setMobileView('preview');
             }
         }
-    }, [currentStep, essay, activeTab]);
+    }, [currentStep, essay, activeTab, mobileView]);
 
     const formatTime = (seconds) => {
         const mins = Math.floor(seconds / 60);
@@ -333,7 +333,7 @@ const App = () => {
                                     ARCHITECT
                                 </h2>
                                 <p className="text-stone-900 text-xl font-serif max-w-2xl border-l-4 border-yellow-400 pl-6 italic">
-                                    Essay Architect isn't just a wizard—it's a comprehensive training ground. Here is how to get the most out of it.
+                                    Essay Architect isn&apos;t just a wizard—it&apos;s a comprehensive training ground. Here is how to get the most out of it.
                                 </p>
                             </div>
 
@@ -378,11 +378,11 @@ const App = () => {
                                     <div className="space-y-4">
                                         <div className="border border-stone-700 p-4">
                                             <span className="text-yellow-400 font-bold uppercase text-xs tracking-wider mb-1 block">Opinion Essays</span>
-                                            <p className="font-serif text-xl">"To what extent do you agree?"</p>
+                                            <p className="font-serif text-xl">&ldquo;To what extent do you agree?&rdquo;</p>
                                         </div>
                                         <div className="border border-stone-700 p-4">
                                             <span className="text-yellow-400 font-bold uppercase text-xs tracking-wider mb-1 block">Discussion Essays</span>
-                                            <p className="font-serif text-xl">"Discuss both views and give your opinion."</p>
+                                            <p className="font-serif text-xl">&ldquo;Discuss both views and give your opinion.&rdquo;</p>
                                         </div>
                                     </div>
                                 </div>
@@ -441,8 +441,6 @@ const App = () => {
                                     setCurrentStep={setCurrentStep}
                                     essay={essay}
                                     handleInputChange={handleInputChange}
-                                    tourProps={tourProps}
-                                    topic={topic}
                                 />
                             </div>
                         </div>
