@@ -331,14 +331,14 @@ const App = () => {
             <main className="flex-1 overflow-hidden relative">
                 {activeTab === 'learn' && (
                     <div className="h-full overflow-y-auto custom-scrollbar bg-[#f4f1ea]">
-                        <div className="max-w-7xl mx-auto p-12">
+                        <div className="max-w-7xl mx-auto p-6 md:p-12">
                             <div className="mb-16 border-b-4 border-stone-900 pb-12">
-                                <h2 className="text-7xl md:text-8xl font-black font-serif text-stone-900 mb-6 tracking-tighter leading-[0.8]">
+                                <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-serif text-stone-900 mb-6 tracking-tight md:tracking-tighter leading-tight md:leading-[0.8]">
                                     MASTER <br />
-                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600" style={{ WebkitTextStroke: '2px #1c1917' }}>THE</span> <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600" style={{ WebkitTextStroke: '1px #1c1917', textStroke: '1px #1c1917' }}>THE</span> <br />
                                     ARCHITECT
                                 </h2>
-                                <p className="text-stone-900 text-xl font-serif max-w-2xl border-l-4 border-yellow-400 pl-6 italic">
+                                <p className="text-stone-900 text-base md:text-xl font-serif max-w-2xl border-l-4 border-yellow-400 pl-4 md:pl-6 italic">
                                     Essay Architect isn&apos;t just a wizard—it&apos;s a comprehensive training ground. Here is how to get the most out of it.
                                 </p>
                             </div>
