@@ -120,3 +120,8 @@ dist
 
 # Git worktrees
 .worktrees
+
+# Antigravity/Cursor/Claude noise
+.claude/
+.codex/
+.cursor/
