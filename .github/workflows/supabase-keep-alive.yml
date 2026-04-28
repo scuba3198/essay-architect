@@ -1,0 +1,21 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # Runs at 00:00 every 3 days
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # Allows manual testing
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Pinging both projects from this single workflow
+        project_id: [hnebikpizabhzozvycxx, ofmfmmkijmpkwvmduuex]
+    steps:
+      - name: Ping Supabase Database
+        run: |
+          curl -X GET "https://${{ matrix.project_id }}.supabase.co/rest/v1/" \
+          -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
